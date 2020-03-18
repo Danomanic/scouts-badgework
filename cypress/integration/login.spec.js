@@ -43,4 +43,9 @@ context('Actions', () => {
     cy.get('#loginSubmit').click();
     cy.get('body').should('contain', 'Hello Scout One!');
   });
+
+  it('Should limit characters of name to 70', () => {
+    cy.get('#scouts').click();
+    cy.get('#inputName').type('x'.repeat(76)).should('have.value', 'x'.repeat(70));
+  });
 });

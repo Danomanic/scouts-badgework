@@ -44,29 +44,21 @@ app.get('/logout', (req, res) => {
 
 
 app.post('/login', (req, res) => {
-  db.connect((cerr) => {
-    if (cerr) {
-      log('Unable to connect to Database', cerr);
-      process.exit(0);
-    }
+  const user = {
+    name: req.body.name,
+    section: req.body.section,
+  };
+  db.db('badgework').collection('users').insertOne(user, (err, data) => {
+    if (err) throw err;
+    log(`Added new user: ${user.name}`);
 
-    const user = {
-      name: req.body.name,
-      section: req.body.section,
+    const newUser = {
+      name: user.name,
+      section: user.section,
+      id: data.insertedId,
     };
-    db.db('badgework').collection('users').insertOne(user, (err, data) => {
-      if (err) throw err;
-      log(`Added new user: ${user.name}`);
-
-      const newUser = {
-        name: user.name,
-        section: user.section,
-        id: data.insertedId,
-      };
-      db.close();
-      res.cookie('user', newUser);
-      res.status(201).send(newUser);
-    });
+    res.cookie('user', newUser);
+    res.status(201).send(newUser);
   });
 });
 
