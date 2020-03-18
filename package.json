@@ -1,6 +1,6 @@
 {
   "name": "scouts-badgework",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tool for doing The Scout Association Badges from home",
   "main": "src/index.js",
   "scripts": {
