@@ -16,14 +16,24 @@ nunjucks.configure(path.join(__dirname, 'views/'), {
   express: app,
 });
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true,
+}));
+
 app.use(require('cookie-parser')());
 
 app.get('/', (req, res) => {
   if (!req.cookies.user) {
-    res.render('index.html', { title: 'Getting Started Page', version: pjson.version });
+    res.render('index.html', {
+      title: 'Getting Started Page',
+      version: pjson.version,
+    });
   } else {
-    res.render('badges.html', { title: 'Badges', user: req.cookies.user, version: pjson.version });
+    res.render('badges.html', {
+      title: 'Badges',
+      user: req.cookies.user,
+      version: pjson.version,
+    });
   }
 });
 
@@ -34,21 +44,34 @@ app.get('/logout', (req, res) => {
 
 
 app.post('/login', (req, res) => {
-  const user = { name: req.body.name, section: req.body.section };
-  db.db('badgework').collection('users').insertOne(user, (err, data) => {
-    if (err) throw err;
-    log(`Added new user: ${user.name}`);
+  db.connect((cerr) => {
+    if (cerr) {
+      log('Unable to connect to Database', cerr);
+      process.exit(0);
+    }
 
-    const newUser = {
-      name: user.name,
-      section: user.section,
-      id: data.insertedId,
+    const user = {
+      name: req.body.name,
+      section: req.body.section,
     };
-    res.cookie('user', newUser);
-    res.status(200).send(newUser);
+    db.db('badgework').collection('users').insertOne(user, (err, data) => {
+      if (err) throw err;
+      log(`Added new user: ${user.name}`);
+
+      const newUser = {
+        name: user.name,
+        section: user.section,
+        id: data.insertedId,
+      };
+      db.close();
+      res.cookie('user', newUser);
+      res.status(201).send(newUser);
+    });
   });
 });
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
-app.listen(port, () => log(`Badgework App Listening on Port ${port}!`));
+const server = app.listen(port, () => log(`Badgework App Listening on Port ${port}!`));
+
+module.exports = server;
