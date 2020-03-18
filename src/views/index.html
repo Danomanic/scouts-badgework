@@ -31,7 +31,7 @@
 
   $("#login").submit(function (event) {
     event.preventDefault();
-    if ($("#inputName").val() !== "" && $("#inputName").val().match(/^[A-Za-z0-9]+$/)) {
+    if ($("#inputName").val() !== "" && $("#inputName").val().match(/^[A-Za-z0-9 ]+$/)) {
       $.post("/login", $("#login").serialize())
         .done(function (data) {
           window.location.href = "/";
@@ -40,7 +40,7 @@
           alert("error");
         });
     } else {
-      var e = $('<div class="alert alert-danger" role="alert">Name can only contain letters and numbers.</div>')
+      var e = $('<div class="alert alert-danger" role="alert">Name can only contain letters, numbers and spaces.</div>')
       $("#alerts").html(e);
     }
   });
