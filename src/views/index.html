@@ -1,0 +1,48 @@
+{% extends "template.html" %}
+
+{% block content %}
+{% include "elements/name.html" %}
+{% include "elements/sections.html" %}
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+  $("#name").hide().removeClass('d-none');
+
+  function partTwo() {
+    $("#sections").hide();
+    $("#name").show();
+    $("#inputName").focus();
+  }
+  $("#beavers").click(function () {
+    $("#inputSection").val('1');
+    partTwo();
+  });
+  $("#cubs").click(function () {
+    $("#inputSection").val('2');
+    partTwo();
+  });
+  $("#scouts").click(function () {
+    $("#inputSection").val('3');
+    partTwo();
+  });
+
+  $("#login").submit(function (event) {
+    event.preventDefault();
+    if ($("#inputName").val() !== "" && $("#inputName").val().match(/^[A-Za-z0-9]+$/)) {
+      $.post("/login", $("#login").serialize())
+        .done(function (data) {
+          window.location.href = "/";
+        })
+        .fail(function () {
+          alert("error");
+        });
+    } else {
+      var e = $('<div class="alert alert-danger" role="alert">Name can only contain letters and numbers.</div>')
+      $("#alerts").html(e);
+    }
+  });
+</script>
+{% endblock %}

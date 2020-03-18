@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700,800,900&display=swap');
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #7413dc;
+  color: #ffffff;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+small {
+  font-weight: 300;
+}
+
+.disclaimer {
+  margin-top: 2em;
+  font-size: 10px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.btn-primary {
+  background-color: #7413dc;
+  border-color: #7413dc;
+}
+
+.name {
+  margin-top: 2em;
+  padding: 2em;
+  color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.sections {
+  margin-top: 2em;
+  padding: 2em;
+  color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.welcome {
+  padding: 2em 0em;
+}
+
+.area {
+  margin-top: 2em;
+}
+
+.controls {
+  margin-top: 2em;
+}
+
+.section {
+  padding: 2em;
+  box-shadow: 0px 0px 1em rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.section:hover {
+  opacity: 0.5;
+}
+
+.beavers {
+  color: #ffffff;
+  background-color: #006ddf;
+}
+
+.cubs {
+  color: #ffffff;
+  background-color: #23a950;
+}
+
+
+.scouts {
+  color: #ffffff;
+  background-color: #7413dc;
+}
+
+.badgelist {
+  margin-top: 2em;
+  padding: 2em 0em;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.badge {
+  padding: 1em 2em;
+  color: #000000;
+  background-color: #ffffff;
+  margin-bottom: 4em;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.badge:hover {
+  opacity: 0.5;
+}
