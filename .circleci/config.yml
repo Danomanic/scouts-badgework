@@ -12,9 +12,6 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-      - cypress/run:
-          steps:
-            - run: npm run test:integration
 workflows:
     build-and-test:
       jobs:
