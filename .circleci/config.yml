@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
-  cypress: cypress-io/cypress@1.19.1
 jobs:
   build-and-test:
     executor:
@@ -12,8 +11,8 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
+            - run: npm run test:integration
 workflows:
     build-and-test:
       jobs:
         - build-and-test
-        - cypress/run
