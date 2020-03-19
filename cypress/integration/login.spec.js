@@ -8,7 +8,6 @@ context('Actions', () => {
     cy.get('#inputSection').should('have.value', '1');
     cy.get('#inputName').type('Beaver').should('have.value', 'Beaver');
     cy.get('#loginSubmit').click();
-    cy.get('body').should('contain', 'Hello Beaver!');
     cy.get('body').should('contain', 'Here is a list of Beaver Badges you can work towards online...');
   });
 
@@ -17,7 +16,6 @@ context('Actions', () => {
     cy.get('#inputSection').should('have.value', '2');
     cy.get('#inputName').type('Cub').should('have.value', 'Cub');
     cy.get('#loginSubmit').click();
-    cy.get('body').should('contain', 'Hello Cub!');
     cy.get('body').should('contain', 'Here is a list of Cub Badges you can work towards online...');
   });
 
@@ -26,7 +24,6 @@ context('Actions', () => {
     cy.get('#inputSection').should('have.value', '3');
     cy.get('#inputName').type('Scout').should('have.value', 'Scout');
     cy.get('#loginSubmit').click();
-    cy.get('body').should('contain', 'Hello Scout!');
     cy.get('body').should('contain', 'Here is a list of Scout Badges you can work towards online...');
   });
 
@@ -39,9 +36,8 @@ context('Actions', () => {
 
   it('Should not allow names with spaces', () => {
     cy.get('#scouts').click();
-    cy.get('#inputName').type('Scout One').should('have.value', 'Scout One');
+    cy.get('#inputName').type('Scout One').should('have.value', 'ScoutOne');
     cy.get('#loginSubmit').click();
-    cy.get('#alerts').should('contain', 'Name can only contain letters and numbers.');
   });
 
   it('Should limit characters of name to 70', () => {

@@ -2,7 +2,8 @@
   <div class="welcome">
     <div class="row">
       <div class="col-md">
-        <h1>{% if user.existing == true %}Welcome back{% else %}Hello{% endif %} {{ user.name }}!</h1>
+        <h1>{% if user.existing == true %}Welcome back{% else %}Hello{% endif %} {{ user.name }}</h1>
+        <small>* Remember your user name, so you can login again next time.</small>
       </div>
       <div class="col-md"><a class="btn btn-dark btn-small float-right" href="/logout">Logout</a></div>
     </div>

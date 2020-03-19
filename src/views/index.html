@@ -29,6 +29,16 @@
     partTwo();
   });
 
+  $("#inputName").on({
+    keydown: function (e) {
+      if (e.which === 32)
+        return false;
+    },
+    change: function () {
+      this.value = this.value.replace(/\s/g, "");
+    }
+  });
+
   $("#login").submit(function (event) {
     event.preventDefault();
     if ($("#inputName").val() !== "" && $("#inputName").val().match(/^[A-Za-z0-9]+$/)) {
