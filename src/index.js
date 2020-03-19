@@ -3,8 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const nunjucks = require('nunjucks');
 const path = require('path');
-const db = require('./utils/db');
 const pjson = require('../package.json');
+
+const users = require('./users');
 
 const { log } = console;
 
@@ -43,23 +44,17 @@ app.get('/logout', (req, res) => {
 });
 
 
-app.post('/login', (req, res) => {
-  const user = {
-    name: req.body.name,
-    section: req.body.section,
-  };
-  db.db('badgework').collection('users').insertOne(user, (err, data) => {
-    if (err) throw err;
-    log(`Added new user: ${user.name}`);
-
-    const newUser = {
-      name: user.name,
-      section: user.section,
-      id: data.insertedId,
-    };
-    res.cookie('user', newUser);
-    res.status(201).send(newUser);
-  });
+app.post('/login', async (req, res) => {
+  await users.login(req.body.name.toUpperCase(), req.body.section)
+    .then((user) => {
+      log('User Signed in:', user);
+      res.cookie('user', user);
+      res.status(201).send(user);
+    })
+    .catch((err) => {
+      log(err);
+      res.status(500).send('Sorry an error occured when trying to login. Please try again later.');
+    });
 });
 
 app.use('/static', express.static(path.join(__dirname, 'public')));

@@ -34,14 +34,14 @@ context('Actions', () => {
     cy.get('#scouts').click();
     cy.get('#inputName').type('Scout&&&&&').should('have.value', 'Scout&&&&&');
     cy.get('#loginSubmit').click();
-    cy.get('#alerts').should('contain', 'Name can only contain letters, numbers and spaces.');
+    cy.get('#alerts').should('contain', 'Name can only contain letters and numbers.');
   });
 
-  it('Should allow names with spaces', () => {
+  it('Should not allow names with spaces', () => {
     cy.get('#scouts').click();
     cy.get('#inputName').type('Scout One').should('have.value', 'Scout One');
     cy.get('#loginSubmit').click();
-    cy.get('body').should('contain', 'Hello Scout One!');
+    cy.get('#alerts').should('contain', 'Name can only contain letters and numbers.');
   });
 
   it('Should limit characters of name to 70', () => {
